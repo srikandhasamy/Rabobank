@@ -2,18 +2,19 @@
 
 namespace Rabobank.Training.ClassLibrary.BusinessLayer
 {
-    /// <summary>
-    /// Get updated Portfolio by calling FundProcessor for all data manupulation based on the filename.
-    /// </summary>
+   
     public class PortfolioProcessor : IPortfolioProcessor
     {
+        private readonly IFundsProcessor FundsProcessor;
+
         public PortfolioProcessor(IFundsProcessor fundsProcessor)
         {
             FundsProcessor = fundsProcessor;
         }
 
-        public IFundsProcessor FundsProcessor { get; set; }
-
+        /// <summary>
+        /// Get updated Portfolio by calling FundProcessor for all data manupulation based on the filename and return Portfolio.
+        /// </summary>
         public PortfolioVM GetUpdatedPortfolio(string fileName)
         {
             PortfolioVM? portfolioVM = null;

@@ -15,7 +15,6 @@ namespace Rabobank.Training.WebApp.Controllers
 
         /// <SUMMARY>
         /// Cunstructor Will Initialize Portfolioprocessor service 
-        /// Services are configured in Program.cs For This Purpose.
         /// </summary>
         /// <param name="processor"></param>
         /// <param name="config"></param>
@@ -28,11 +27,11 @@ namespace Rabobank.Training.WebApp.Controllers
         }
 
         /// <summary>
-        /// GetUpdatedPortfolio method called by ANGULAR.
+        /// It read XML data and process to return portfolio position 
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public PositionVM[] Get()
+        public PositionVM[] GetPosition()
         {
             PositionVM[] positions;
             try
@@ -42,11 +41,11 @@ namespace Rabobank.Training.WebApp.Controllers
 
                 if (portfolioViewModel == null)
                 {
-                    throw new ArgumentException("Necessary Portfolio is not available to display");
+                    throw new ArgumentException("Portfolio returned a null argument");
                 }
                 if (portfolioViewModel.Positions == null || portfolioViewModel.Positions.Count == 0)
                 {
-                    throw new ArgumentException("No Valid Positions found under portfolio.");
+                    throw new ArgumentException("Portfolio Positions returned a null argument.");
                 }
 
                 positions = portfolioViewModel.Positions.ToArray();

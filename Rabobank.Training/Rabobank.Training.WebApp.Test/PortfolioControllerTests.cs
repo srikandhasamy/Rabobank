@@ -15,7 +15,7 @@ namespace Rabobank.Training.WebApp.Test
         private readonly Mock<IPortfolioProcessor> portfolioProcessor = new();
         private readonly Mock<ILogger<PortfolioController>> logger = new();
 
-        //Test Should Return Correct PortfolioObject Back 
+        //Test Should Returned expected Portfolio and Position object  
         [TestMethod]
         public void Get_ShouldReturnCorrectPortfolioObjectBack_RunSuccessfully()
         {
@@ -43,10 +43,10 @@ namespace Rabobank.Training.WebApp.Test
             var sut = new PortfolioController(portfolioProcessor.Object, config, logger.Object);
 
             // Act
-            var httpResult = sut.Get();
+            var httpResult = sut.GetPosition();
 
             // Assert
-            httpResult.Should().HaveCount(6, "Because we passed 6 Positions in dummy return object");
+            httpResult.Should().BeEquivalentTo(dummyPortfolio.Positions);
 
         }
 
@@ -67,15 +67,17 @@ namespace Rabobank.Training.WebApp.Test
             var sut = new PortfolioController(portfolioProcessor.Object, config, logger.Object);
             
             // Act
-            Func<PositionVM[]> func = () => sut.Get();
+            Func<PositionVM[]> func = () => sut.GetPosition();
 
             // Assert
-            func.Should().Throw<ArgumentException>("Because GetPortfolio returns null here and client code mus throw an Argument Exception").WithMessage("Necessary Portfolio is not available to display");
+            func.Should()
+                .Throw<ArgumentException>("GetPortfolio returns null here and client code mus throw an Argument Exception")
+                .WithMessage("Portfolio returned a null argument");
 
         }
 
 
-        //Test Should Throw Exception If PortfolioObject Does Not HavePositions
+        //Test Should Throw Exception If Portfolio Object Does Not Have The Positions
         [TestMethod]
         public void Get_ShouldThrowException_IfPortfolioObjectDoesNotHavePositions()
         {
@@ -95,10 +97,12 @@ namespace Rabobank.Training.WebApp.Test
             var sut = new PortfolioController(portfolioProcessor.Object, config, logger.Object); 
             
             // Act
-            Func<PositionVM[]> func = () => sut.Get();
+            Func<PositionVM[]> func = () => sut.GetPosition();
 
             // Assert
-            func.Should().Throw<Exception>("Because GetPortfolio returns no Positions in Portfolio and client code must throw an exception").WithMessage("No Valid Positions found under portfolio.");
+            func.Should()
+                .Throw<Exception>("GetPortfolio returns no Positions in Portfolio and client code must throw an exception")
+                .WithMessage("Portfolio Positions returned a null argument.");
 
         }
 

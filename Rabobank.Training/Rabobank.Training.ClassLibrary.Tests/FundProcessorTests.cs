@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Rabobank.Training.ClassLibrary.ViewModels;
 using Rabobank.Training.ClassLibrary.BusinessLayer;
 
 namespace Rabobank.Training.ClassLibrary.Tests
@@ -7,15 +6,13 @@ namespace Rabobank.Training.ClassLibrary.Tests
     [TestClass]
     public class FundProcessorTests
     {
-
+        //Test Should Read Valid XML File Correctly
         [TestMethod]
         [DeploymentItem("TestData//FundOfMandatesDataWithValidFile.xml")]
-
-        //Test Should Read Valid XML File Correctly
         public void ReadFundOfMandates_WithValidFile_HandleRequest()
         {
             // Arrange
-            int counOfMandatesIntestFile = 4;
+            int expectedCountMandatesFile = 4;
             string filePath = "FundOfMandatesDataWithValidFile.xml";
 
             IFundsProcessor fileProcessor = new FundProcessor();
@@ -25,24 +22,18 @@ namespace Rabobank.Training.ClassLibrary.Tests
 
 
             // Assert
-            Assert.IsNotNull(funds);
-            Assert.AreEqual(funds.Count, counOfMandatesIntestFile); //Assuming we already know count of mandates inside the test file.
-            Assert.IsInstanceOfType(funds, typeof(List<FundOfMandates>));
-
-            funds.Should().HaveCount(counOfMandatesIntestFile, "we have passed 4 mandates to XML");
-            funds.Should().NotBeNull();
-            funds.Should().BeAssignableTo(typeof(List<FundOfMandates>));
+            Assert.AreEqual(funds.Count, expectedCountMandatesFile);            
 
         }
 
 
         //Test Should Throw Error When Funds Mandates Are Not Available In File
         [TestMethod]
-        [DeploymentItem("TestData//FundOfMandatesDataWithBlankFundsOfMandates.xml")]
-        public void ReadFundOfMandates_WithBlankFile_ThrowError()
+        [DeploymentItem("TestData//FundOfMandatesDataWithEmptyFundsOfMandates.xml")]
+        public void ReadFundOfMandates_WithEmptyFundsOfMandates_ThrowError()
         {
             // Arrange            
-            string filePath = "FundOfMandatesDataWithBlankFundsOfMandates.xml";
+            string filePath = "FundOfMandatesDataWithEmptyFundsOfMandates.xml";
 
             IFundsProcessor fileProcessor = new FundProcessor();
 
@@ -50,11 +41,11 @@ namespace Rabobank.Training.ClassLibrary.Tests
             var sut = FluentActions.Invoking(() => fileProcessor.ReadFundOfMandatesFile(filePath));
 
             // Assert
-            sut.Should().Throw<Exception>().WithMessage("Unable to Read blank FundOfMandatesFile. Please check the file.");
+            sut.Should().Throw<Exception>().WithMessage("Invalid FundOfMandates file. Please check the file.");
 
         }
-
          
+
         //Test should Return StaticList Of Portfolios
         [TestMethod]
         public void GetPortfolios_ShouldReturnStaticList()
@@ -68,7 +59,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
             var sut = fundProcessor.GetPortfolio();
 
             // Assert
-            sut.Should().NotBeNull().And.BeAssignableTo(typeof(PortfolioVM)).And.BeEquivalentTo(portfolio);
+            sut.Should().BeEquivalentTo(portfolio);
 
         } 
 
@@ -89,8 +80,8 @@ namespace Rabobank.Training.ClassLibrary.Tests
             var outputPos = fundsProcessor.GetCalculatedMandates(inputPosition, fundOfMandates);
 
             // Assert
-            outputPos.Should().NotBeNull().And.BeOfType<PositionVM>().And.BeEquivalentTo(outputPosition);
-            outputPos.Mandates.Should().HaveCount(5, "Because Liquidity should get added since we pass Liquidity allocation more than 0");
+            outputPos.Should().BeEquivalentTo(outputPosition);
+            outputPos.Mandates.Should().BeEquivalentTo(outputPosition.Mandates);
              
         }
 
@@ -113,7 +104,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
             var sut = fundsProcessor.GetCalculatedMandates(inputPosition, fundOfMandates);
 
             // Assert
-            sut.Should().NotBeNull().And.BeOfType<PositionVM>().And.BeEquivalentTo(outputPosition);
+            sut.Should().BeEquivalentTo(outputPosition);
              
         }
 
@@ -128,7 +119,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
             var inputPosition = MockData.GetMockPositionVM();
             var outputPosition = MockData.GetMockPositionVM();
             var fundOfMandates = MockData.GetMockFundOfMandates();
-            fundOfMandates.InstrumentCode = "Pos2";
+            fundOfMandates.InstrumentCode = "Test2";
 
             IFundsProcessor fundsProcessor = new FundProcessor();
 
@@ -136,7 +127,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
             var sut = fundsProcessor.GetCalculatedMandates(inputPosition, fundOfMandates);
 
             // Assert
-            sut.Should().NotBeNull().And.BeOfType<PositionVM>().And.BeEquivalentTo(outputPosition);
+            sut.Should().BeEquivalentTo(outputPosition);
 
         }
 

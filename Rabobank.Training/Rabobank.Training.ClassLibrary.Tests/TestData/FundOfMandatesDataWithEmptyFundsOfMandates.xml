@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <FundsOfMandatesData xmlns="http://amt.rnss.rabobank.nl/">
-  <FundsOfMandates>
-
- 
-
-  </FundsOfMandates>
-
+  <FundOfMandates>
+  </FundOfMandates>
 
 </FundsOfMandatesData>

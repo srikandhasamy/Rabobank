@@ -7,7 +7,7 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
     public class FundProcessor : IFundsProcessor
     {
         /// <summary>
-        /// Calculate Mandate with Position object And Fundofmandate Objects And Return Updated Positionvm Back To Client.
+        /// Calculate Mandate with Position And Fundofmandate Objects And Return Updated Position To Client.
         /// </summary>
         /// <param name="position"></param>
         /// <param name="fundOfmandates"></param>
@@ -47,7 +47,7 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
         }
 
         /// <summary>
-        /// Get Portfolio staticobject and return to Client.
+        /// Get Portfolio static object and return.
         /// </summary>
         /// <returns></returns>
         public PortfolioVM GetPortfolio()
@@ -68,7 +68,7 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
         }
 
         /// <summary>
-        /// Read Funds XML file and set Domain Classes accordingly.
+        /// Read FundOfMandates XML file and process to return list of FundOfMandates .
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
@@ -87,12 +87,12 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
                 } 
                 if (fundsOfMandatesData == null)
                 {
-                    throw new ArgumentException("UnExpected Error. Please check that file contains data correctly.");
+                    throw new ArgumentException("FundOfMandates returned null. Please check the file.");
 
                 }
-                else if (fundsOfMandatesData != null && fundsOfMandatesData!.FundsOfMandates!.Length == 0)
+                else if (fundsOfMandatesData != null && ( fundsOfMandatesData!.FundsOfMandates==null || fundsOfMandatesData!.FundsOfMandates!.Length == 0 ))
                 {
-                    throw new ArgumentException("Unable to Read blank FundOfMandatesFile. Please check the file.");
+                    throw new ArgumentException("Invalid FundOfMandates file. Please check the file.");
                 }
                 else
                 {
