@@ -2,7 +2,7 @@
 
 namespace Rabobank.Training.ClassLibrary.BusinessLayer
 {
-   
+
     public class PortfolioProcessor : IPortfolioProcessor
     {
         private readonly IFundsProcessor FundsProcessor;
@@ -19,7 +19,7 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
         {
             PortfolioVM? portfolioVM = null;
             List<FundOfMandates>? mandates = null;
-            
+
             portfolioVM = FundsProcessor.GetPortfolio();
             mandates = FundsProcessor.ReadFundOfMandatesFile(fileName);
 

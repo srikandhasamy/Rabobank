@@ -22,7 +22,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
 
 
             // Assert
-            Assert.AreEqual(funds.Count, expectedCountMandatesFile);            
+            Assert.AreEqual(funds.Count, expectedCountMandatesFile);
 
         }
 
@@ -44,14 +44,14 @@ namespace Rabobank.Training.ClassLibrary.Tests
             sut.Should().Throw<Exception>().WithMessage("Invalid FundOfMandates file. Please check the file.");
 
         }
-         
+
 
         //Test should Return StaticList Of Portfolios
         [TestMethod]
         public void GetPortfolios_ShouldReturnStaticList()
         {
             // Arrage
-            var portfolio =MockData.GetMockPortfolioVMList();
+            var portfolio = MockData.GetMockPortfolioVMList();
 
             IFundsProcessor fundProcessor = new FundProcessor();
 
@@ -61,7 +61,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
             // Assert
             sut.Should().BeEquivalentTo(portfolio);
 
-        } 
+        }
 
         //Test Should Add Liquidity Mandate As Additional Mandatein PositionVM
         [TestMethod]
@@ -71,8 +71,8 @@ namespace Rabobank.Training.ClassLibrary.Tests
 
             var inputPosition = MockData.GetMockPositionVM();
             var outputPosition = MockData.GetMockPositionVM();
-            outputPosition.Mandates=MockData.GetMockMandateVMList();
-            var fundOfMandates =  MockData.GetMockFundOfMandates();
+            outputPosition.Mandates = MockData.GetMockMandateVMList();
+            var fundOfMandates = MockData.GetMockFundOfMandates();
 
             IFundsProcessor fundsProcessor = new FundProcessor();
 
@@ -82,7 +82,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
             // Assert
             outputPos.Should().BeEquivalentTo(outputPosition);
             outputPos.Mandates.Should().BeEquivalentTo(outputPosition.Mandates);
-             
+
         }
 
 
@@ -93,7 +93,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
         {
             //Arrange
 
-            var inputPosition =MockData.GetMockPositionVM();
+            var inputPosition = MockData.GetMockPositionVM();
             var outputPosition = MockData.GetMockPositionVM();
             outputPosition.Mandates = MockData.GetMockMandateVMList();
             var fundOfMandates = MockData.GetMockFundOfMandates();
@@ -105,7 +105,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
 
             // Assert
             sut.Should().BeEquivalentTo(outputPosition);
-             
+
         }
 
 

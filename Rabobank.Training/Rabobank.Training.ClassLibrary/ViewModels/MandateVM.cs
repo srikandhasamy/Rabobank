@@ -1,8 +1,8 @@
 ﻿namespace Rabobank.Training.ClassLibrary.ViewModels
-    
+
 {
     /// <summary>
-    /// View Model class to be used by Front End and Maps to Mandate Entity
+    /// Mandate View Model class to be used by client side and Maps to Mandate Entity
     /// </summary>
     public class MandateVM
     {

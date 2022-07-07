@@ -2,8 +2,8 @@
 
 namespace Rabobank.Training.ClassLibrary.BusinessLayer
 {
-    public interface  IPortfolioProcessor
+    public interface IPortfolioProcessor
     {
-         PortfolioVM GetUpdatedPortfolio(string fileName);
+        PortfolioVM GetUpdatedPortfolio(string fileName);
     }
 }

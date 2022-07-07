@@ -1,5 +1,5 @@
-﻿using System.Xml.Serialization;
-using Rabobank.Training.ClassLibrary.ViewModels;
+﻿using Rabobank.Training.ClassLibrary.ViewModels;
+using System.Xml.Serialization;
 
 
 namespace Rabobank.Training.ClassLibrary.BusinessLayer
@@ -62,7 +62,7 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
                      new PositionVM { Code="NL0000292332", Name="Rabobank Core Aandelen Fonds T2", Value=45678 },
                      new PositionVM { Code="LU0042381250", Name="Morgan Stanley Invest US Gr Fnd", Value=56789 }
                     }
-            }; 
+            };
 
             return portfolio;
         }
@@ -84,13 +84,13 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
                 using (reader = new StreamReader(fileName))
                 {
                     fundsOfMandatesData = serealizer.Deserialize(reader) as FundsOfMandatesData;
-                } 
+                }
                 if (fundsOfMandatesData == null)
                 {
                     throw new ArgumentException("FundOfMandates returned null. Please check the file.");
 
                 }
-                else if (fundsOfMandatesData != null && ( fundsOfMandatesData!.FundsOfMandates==null || fundsOfMandatesData!.FundsOfMandates!.Length == 0 ))
+                else if (fundsOfMandatesData != null && (fundsOfMandatesData!.FundsOfMandates == null || fundsOfMandatesData!.FundsOfMandates!.Length == 0))
                 {
                     throw new ArgumentException("Invalid FundOfMandates file. Please check the file.");
                 }
@@ -103,11 +103,11 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
             }
             catch (InvalidOperationException inv)
             {
-                throw new InvalidOperationException("Invalid Operation Error", inv); 
+                throw new InvalidOperationException("Invalid Operation Error", inv);
             }
             catch (Exception ex)
             {
-                throw new ArgumentException( ex.Message);
+                throw new ArgumentException(ex.Message);
             }
         }
 

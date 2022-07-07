@@ -1,10 +1,10 @@
-using Moq;
 using FluentAssertions;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
-using Rabobank.Training.WebApp.Controllers;
-using Rabobank.Training.ClassLibrary.ViewModels;
+using Microsoft.Extensions.Logging;
+using Moq;
 using Rabobank.Training.ClassLibrary.BusinessLayer;
+using Rabobank.Training.ClassLibrary.ViewModels;
+using Rabobank.Training.WebApp.Controllers;
 
 
 namespace Rabobank.Training.WebApp.Test
@@ -65,7 +65,7 @@ namespace Rabobank.Training.WebApp.Test
             portfolioProcessor.Setup(p => p.GetUpdatedPortfolio(It.IsAny<string>())).Returns(portfolio!);
 
             var sut = new PortfolioController(portfolioProcessor.Object, config, logger.Object);
-            
+
             // Act
             Func<PositionVM[]> func = () => sut.GetPosition();
 
@@ -94,8 +94,8 @@ namespace Rabobank.Training.WebApp.Test
 
             portfolioProcessor.Setup(p => p.GetUpdatedPortfolio(It.IsAny<string>())).Returns(portfolio);
 
-            var sut = new PortfolioController(portfolioProcessor.Object, config, logger.Object); 
-            
+            var sut = new PortfolioController(portfolioProcessor.Object, config, logger.Object);
+
             // Act
             Func<PositionVM[]> func = () => sut.GetPosition();
 

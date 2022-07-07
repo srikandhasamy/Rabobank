@@ -1,8 +1,7 @@
 ﻿namespace Rabobank.Training.ClassLibrary.ViewModels
 {
     /// <summary>
-    /// View Model class to be used by Front End . 
-    /// Contains position information along with list of mapped MandateVM objects.
+    /// This View Model class to be used by and client side to display position information along with list of mapped MandateVM objects.
     /// </summary>
     public class PositionVM
     {

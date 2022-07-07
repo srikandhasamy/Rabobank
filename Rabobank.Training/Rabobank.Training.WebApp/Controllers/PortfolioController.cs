@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Rabobank.Training.ClassLibrary.BusinessLayer;
 using Rabobank.Training.ClassLibrary.ViewModels;
 
