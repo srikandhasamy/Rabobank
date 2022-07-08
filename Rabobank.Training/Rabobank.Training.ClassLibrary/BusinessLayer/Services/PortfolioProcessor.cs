@@ -21,7 +21,7 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
             List<FundOfMandates>? mandates = null;
 
             portfolioVM = FundsProcessor.GetPortfolio();
-            mandates = FundsProcessor.ReadFundOfMandatesFile(fileName);
+            mandates = FundsProcessor.GetFundOfMandates(fileName);
 
             portfolioVM.Positions!.ForEach(position =>
             {

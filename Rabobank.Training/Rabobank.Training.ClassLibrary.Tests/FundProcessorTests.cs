@@ -18,7 +18,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
             IFundsProcessor fileProcessor = new FundProcessor();
 
             // Act
-            var funds = fileProcessor.ReadFundOfMandatesFile(filePath);
+            var funds = fileProcessor.GetFundOfMandates(filePath);
 
 
             // Assert
@@ -38,7 +38,7 @@ namespace Rabobank.Training.ClassLibrary.Tests
             IFundsProcessor fileProcessor = new FundProcessor();
 
             // Act
-            var sut = FluentActions.Invoking(() => fileProcessor.ReadFundOfMandatesFile(filePath));
+            var sut = FluentActions.Invoking(() => fileProcessor.GetFundOfMandates(filePath));
 
             // Assert
             sut.Should().Throw<Exception>().WithMessage("Invalid FundOfMandates file. Please check the file.");

@@ -68,11 +68,11 @@ namespace Rabobank.Training.ClassLibrary.BusinessLayer
         }
 
         /// <summary>
-        /// Read FundOfMandates XML file and process to return list of FundOfMandates .
+        /// Read FundOfMandates from XML file and process to return list of FundOfMandates .
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public List<FundOfMandates> ReadFundOfMandatesFile(string fileName)
+        public List<FundOfMandates> GetFundOfMandates(string fileName)
         {
             try
             {
